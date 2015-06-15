@@ -46,7 +46,7 @@ from dont_touch import interfaces
 print interfaces.__author__
 
 
-class Reader(interfaces.XivAction):
+class Sorter(interfaces.XivAction):
 
     def start(self, input_file, output_file):
 

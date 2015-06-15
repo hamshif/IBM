@@ -12,6 +12,9 @@ import settings
 
 from dont_touch.interfaces import XivAction
 
+HELP_MESSAGE = 'test.py -i <input_file> -o <output_file> -a <action> -c <class_name>'
+
+
 args = sys.argv
 
 
@@ -20,6 +23,8 @@ for a in args:
     print("argument " + a)
 
 print ''
+
+
 
 def main(argv):
 
@@ -30,11 +35,11 @@ def main(argv):
 
     try:
 
-        opts, args = getopt.getopt(argv, "hi:o:a:c:", ["ifile=", "ofile=", "action="])
+        opts, args = getopt.getopt(argv, "hi:o:a:c:", ["ifile=", "ofile=", "action=", "class_name"])
 
     except getopt.GetoptError:
 
-        print 'test.py -i <input_file> -o <output_file> -a <action>'
+        print "slick: ", HELP_MESSAGE
         print(sys.exc_info())
         traceback.print_exc()
         sys.exit(2)
@@ -43,7 +48,7 @@ def main(argv):
 
         if opt == '-h':
 
-            print 'test.py -i <input_file> -o <output_file> -a <action>'
+            print HELP_MESSAGE
             sys.exit()
 
         elif opt in ("-i", "--ifile"):
@@ -74,6 +79,11 @@ def main(argv):
         # my_class = getattr(module, class_name)
         # instance = my_class()
 
+        if class_name == '':
+
+            class_name = settings.installed_actions[action]
+
+
         my_class = getattr(module, class_name)
         instance = my_class()
         instance.start(os.path.join(settings.INPUT_DIR, input_file), output_file)
@@ -86,6 +96,14 @@ def main(argv):
         traceback.print_exc()
         sys.exit(2)
 
+    except KeyError:
+
+        print "couldn't find a class name to fit ", action
+        print "please add a class_name argument"
+        print HELP_MESSAGE
+        print(sys.exc_info())
+        traceback.print_exc()
+        sys.exit(2)
 
 if __name__ == "__main__":
 
