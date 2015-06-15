@@ -2,6 +2,7 @@ __author__ = 'gideon'
 
 import sys, os, traceback
 
+# TODO find less hacky and polluted way to import from parent dirthis was done via __init__.py
 import settings
 
 print('settings.BASE_DIR: ', settings.BASE_DIR)
@@ -20,7 +21,7 @@ class Sorter(interfaces.XivAction):
 
         lines = self.read_file(input_file)
 
-        self.sort_alfabet(lines)
+        self.sort_alfabet(lines, output_file)
 
 
     def read_file(self, full_name):
@@ -49,11 +50,24 @@ class Sorter(interfaces.XivAction):
             sys.exit()
 
 
-    def sort_alfabet(self, lines):
-
+    def sort_alfabet(self, lines, full_output_name):
 
         lines = sorted(lines)
 
-        for line in lines:
+        try:
 
-            print(line)
+            f = open(full_output_name, "w")
+
+            for line in lines:
+
+                print(line)
+                f.write(line + '\n')
+
+        except IOError:
+
+            print "There was an error writing, file_name: ", full_output_name
+            print(sys.exc_info())
+            traceback.print_exc()
+            sys.exit()
+
+

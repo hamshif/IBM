@@ -86,7 +86,9 @@ def main(argv):
 
         my_class = getattr(module, class_name)
         instance = my_class()
-        instance.start(os.path.join(settings.INPUT_DIR, input_file), output_file)
+        instance.start(
+            os.path.join(settings.INPUT_DIR, input_file),
+            os.path.join(settings.OUTPUT_DIR, output_file))
 
     except getopt.GetoptError:
 
@@ -109,4 +111,5 @@ if __name__ == "__main__":
 
     main(sys.argv[1:])
 
+# TODO find less hacky and polluted way to import from parent dirthis was done via actions.__init__.py
 from actions import __termin__
