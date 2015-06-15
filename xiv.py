@@ -65,10 +65,14 @@ def main(argv):
 
     try:
 
-        importlib.import_module('actions.' + action)
+        module = importlib.import_module('actions.' + action)
         # module = __import__(action)
         # my_class = getattr(module, class_name)
         # instance = my_class()
+
+        my_class = getattr(module, class_name)
+        instance = my_class()
+        instance.start(input_file, output_file)
 
     except getopt.GetoptError:
 

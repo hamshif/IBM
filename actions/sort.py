@@ -2,8 +2,6 @@ __author__ = 'gideon'
 
 import sys, os, traceback
 
-from xiv.dont_touch.interfaces import XivAction
-
 
 def read_file(path, file_name):
 
@@ -32,4 +30,23 @@ def read_file(path, file_name):
 read_file('/home/gideon/PycharmProjects/IBM/xiv/input', 'stam.txt')
 
 
-print(XivAction.start)
+import inspect
+currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parentdir = os.path.dirname(currentdir)
+os.sys.path.insert(0, parentdir)
+
+import settings
+
+print('settings.BASE_DIR: ', settings.BASE_DIR)
+
+from dont_touch import interfaces
+
+print interfaces.__author__
+
+
+class Reader(interfaces.XivAction):
+
+    def start(self, input_file, output_file):
+
+        print "input_file: ", input_file
+        print "output_file: ", output_file
