@@ -22,10 +22,11 @@ def main(argv):
     input_file = ''
     output_file = ''
     action = ''
+    class_name = ''
 
     try:
 
-        opts, args = getopt.getopt(argv, "hi:o:a:", ["ifile=", "ofile=", "action="])
+        opts, args = getopt.getopt(argv, "hi:o:a:c:", ["ifile=", "ofile=", "action="])
 
     except getopt.GetoptError:
 
@@ -53,9 +54,14 @@ def main(argv):
 
             action = arg
 
+        elif opt in ("-c", "--class_name"):
+
+            class_name = arg
+
     print 'Input file is: ', input_file
     print 'Output file is: ', output_file
     print 'Action is: ', action
+    print 'Class name is: ', class_name
 
     try:
 
