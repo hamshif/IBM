@@ -2,6 +2,8 @@ __author__ = 'gideon'
 
 import sys, os, traceback
 
+from xiv.dont_touch.interfaces import XivAction
+
 
 def read_file(path, file_name):
 
@@ -28,3 +30,6 @@ def read_file(path, file_name):
 
 
 read_file('/home/gideon/PycharmProjects/IBM/xiv/input', 'stam.txt')
+
+
+print(XivAction.start)

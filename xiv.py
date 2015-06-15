@@ -6,7 +6,7 @@ __author__ = 'gideon'
 import sys, getopt, importlib
 import traceback
 
-# import actions
+from dont_touch.interfaces import XivAction
 
 args = sys.argv
 
