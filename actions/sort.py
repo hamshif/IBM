@@ -27,8 +27,10 @@ def read_file(path, file_name):
 
 
 
-read_file('/home/gideon/PycharmProjects/IBM/xiv/input', 'stam.txt')
+# read_file('/home/gideon/PycharmProjects/IBM/xiv/input', 'stam.txt')
 
+
+# TODO find more elegant way to hack import from parent directory
 
 import inspect
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
@@ -50,3 +52,26 @@ class Reader(interfaces.XivAction):
 
         print "input_file: ", input_file
         print "output_file: ", output_file
+
+        self.read_file(input_file)
+
+
+    def read_file(self, full_name):
+
+        try:
+
+            _file = open(full_name)
+
+            i = 0
+
+            for line in _file:
+
+                i += 1
+                print i, ': ', line
+
+        except IOError:
+
+            print "There was an error reading, file_name: ", full_name
+            print(sys.exc_info())
+            traceback.print_exc()
+            sys.exit()

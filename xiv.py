@@ -1,10 +1,14 @@
 #!/usr/bin/python
+import os
 
 __author__ = 'gideon'
 
 
 import sys, getopt, importlib
 import traceback
+
+
+import settings
 
 from dont_touch.interfaces import XivAction
 
@@ -72,7 +76,7 @@ def main(argv):
 
         my_class = getattr(module, class_name)
         instance = my_class()
-        instance.start(input_file, output_file)
+        instance.start(os.path.join(settings.INPUT_DIR, input_file), output_file)
 
     except getopt.GetoptError:
 
