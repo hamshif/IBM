@@ -19,7 +19,7 @@ from dont_touch import interfaces
 print interfaces.__author__
 
 
-class Sorter(interfaces.XivAction):
+class Tester(interfaces.XivAction):
 
     def start(self, input_file, output_file):
 
