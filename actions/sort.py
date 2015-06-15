@@ -30,7 +30,7 @@ def read_file(path, file_name):
 # read_file('/home/gideon/PycharmProjects/IBM/xiv/input', 'stam.txt')
 
 
-# TODO find more elegant way to hack import from parent directory
+# TODO find more elegant way instead of hack import from parent directory
 
 import inspect
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
@@ -53,7 +53,9 @@ class Sorter(interfaces.XivAction):
         print "input_file: ", input_file
         print "output_file: ", output_file
 
-        self.read_file(input_file)
+        _file = self.read_file(input_file)
+
+        self.sort_alfabet(_file)
 
 
     def read_file(self, full_name):
@@ -69,9 +71,26 @@ class Sorter(interfaces.XivAction):
                 i += 1
                 print i, ': ', line
 
+            return _file
+
         except IOError:
 
             print "There was an error reading, file_name: ", full_name
             print(sys.exc_info())
             traceback.print_exc()
             sys.exit()
+
+
+    def sort_alfabet(_file):
+
+        lines = []
+
+        for line in _file:
+
+            lines.append(line)
+
+        lines = sorted(lines)
+
+        for line in lines:
+
+            print(line)
