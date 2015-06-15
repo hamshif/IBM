@@ -2,14 +2,6 @@ __author__ = 'gideon'
 
 import sys, os, traceback
 
-
-# TODO find more elegant way instead of hack import from parent directory
-
-import inspect
-currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-parentdir = os.path.dirname(currentdir)
-os.sys.path.insert(0, parentdir)
-
 import settings
 
 print('settings.BASE_DIR: ', settings.BASE_DIR)
