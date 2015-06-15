@@ -27,3 +27,4 @@ def read_file(path, file_name):
 
 
 
+read_file('/home/gideon/PycharmProjects/IBM/xiv/input', 'stam.txt')

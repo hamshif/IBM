@@ -3,10 +3,10 @@
 __author__ = 'gideon'
 
 
-import sys, getopt
+import sys, getopt, importlib
 import traceback
 
-from actions import sort
+# import actions
 
 args = sys.argv
 
@@ -57,6 +57,20 @@ def main(argv):
     print 'Output file is: ', output_file
     print 'Action is: ', action
 
+    try:
+
+        importlib.import_module('actions.' + action)
+        # module = __import__(action)
+        # my_class = getattr(module, class_name)
+        # instance = my_class()
+
+    except getopt.GetoptError:
+
+        print "couldn't import ", action
+        print "please create your script and place it in the actions dir of this project"
+        print(sys.exc_info())
+        traceback.print_exc()
+        sys.exit(2)
 
 
 if __name__ == "__main__":
@@ -64,4 +78,3 @@ if __name__ == "__main__":
     main(sys.argv[1:])
 
 
-sort.read_file('/home/gideon/PycharmProjects/IBM/xiv/input', 'stam.txt')
